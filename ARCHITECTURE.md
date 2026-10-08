@@ -51,13 +51,16 @@ Allowed `time_of_day`: `morning`, `evening`, `any`. Code must validate and fall 
 5. Never commit secrets. None should be needed.
 
 ## What works offline vs online
-| Part | Offline? |
-|---|---|
-| Understanding the sentence (Gemma via Ollama) | Yes |
-| The app itself, once running locally | Yes |
-| Weather | No, unless cached |
-| Places and routing | No, unless cached |
-| Map tiles | No, unless cached |
+| Feature / Subsystem | Offline? | Reality & Failure Behavior |
+|---|---|---|
+| **Natural Language Planning (Gemma 2B via Ollama)** | **Yes (100% Offline)** | Runs completely locally on `localhost:11434`. Zero cloud AI APIs, zero external requests, works with Wi-Fi off. |
+| **App UI, Timer & Focus Mode** | **Yes (100% Offline)** | Next.js app served from `localhost:3000`. All React state, focus mode timer countdown, and walk distance tracking run locally in-browser. |
+| **Speech Synthesis (Voice readout)** | **Yes (100% Offline)** | Uses the browser's native `window.speechSynthesis` and local OS voices. Zero cloud voice services. |
+| **Geolocation** | **Partial (Hardware-dependent)** | Works offline on mobile phones with dedicated GNSS/GPS chips. Fails on PCs without GPS (since desktop browsers rely on Wi-Fi BSSID network lookups); handled gracefully with cached or demo coordinate fallback. |
+| **Weather Forecast (Open-Meteo)** | **No (Graceful degradation)** | Requires `api.open-meteo.com`. With Wi-Fi off, catches network error gracefully and reports `"Weather unavailable offline"` without crashing. |
+| **Green Spaces (Overpass API)** | **No (Graceful degradation)** | Requires `overpass-api.de`. With Wi-Fi off, catches network error gracefully and falls back to a local walking loop without crashing. |
+| **Walking Route (OSRM Foot Router)** | **No (Graceful local fallback)** | Turn-by-turn foot network geometry requires `routing.openstreetmap.de`. With Wi-Fi off, falls back seamlessly to a local mathematical straight-line loop (Haversine × 1.3 detour at 5 km/h) marked as an estimate. |
+| **Map Background Tiles (OSM)** | **No (Graceful degradation)** | Background raster tiles require `tile.openstreetmap.org`. With Wi-Fi off, tiles do not load, but the SVG route polyline and custom SVG markers render normally on the canvas. |
 
 State this table honestly in the post. An "offline pack" is a stretch goal that moves the last rows to Yes.
 

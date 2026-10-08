@@ -93,7 +93,7 @@ export function pickBestStart(
     if (!hours || hours.length === 0) {
         return {
             startTime: "Now",
-            reason: "no forecast data",
+            reason: "weather unavailable offline",
         };
     }
 

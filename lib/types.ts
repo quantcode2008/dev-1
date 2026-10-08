@@ -31,3 +31,13 @@ export interface RouteResult {
     isEstimate: boolean;
     turnaroundPoint?: Coordinates;
 }
+
+export interface OfflinePack {
+    savedAt: string;
+    coords: Coordinates;
+    route: RouteResult;
+    place: Place;
+    summarySentence: string;
+    parks: Place[];
+    tileCount: number;
+}

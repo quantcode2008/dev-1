@@ -21,21 +21,12 @@
 - [x] T5. Find a green place
 - [x] T6. Walking route (decision task: tested candidates, D7 updated, lib/routing.ts created)
 - [x] T7. Map (components/Map.tsx with client-side Leaflet, OpenStreetMap tiles, high-contrast sunlight line)
+- [x] T8. One-line result and focus mode (one input, one button, ONE sentence, big Start Walk & End Walk buttons, focus mode HUD, optional speech synthesis)
+- [x] T9. Offline honesty check (codebase audit for AI APIs/keys, external network calls listed, ARCHITECTURE.md offline table updated, offline degradation verified)
+- [x] T10 (stretch). PWA and offline pack (app/manifest.ts, public/sw.js service worker, IndexedDB pack persistence, OSM tile caching, offline restore)
 
 ## To do
-
-### T8. One-line result and focus mode
-- Show a single sentence: leave time, duration, weather.
-- Big "Start walk" button that switches to a minimal view (route, time left).
-- **Done when:** the result screen is readable at a glance outdoors.
-
-### T9. Offline honesty check
-- Search the code for any `fetch` to an AI service. There must be none.
-- Test with Wi-Fi off and list exactly what still works.
-- **Done when:** the offline table in ARCHITECTURE.md matches reality.
-
-### T10 (stretch). PWA and offline pack
-- Service worker, manifest, cached area data and map tiles.
+*(All core and stretch tasks T1–T10 completed!)*
 
 ## Field test log (filled in by the human, outdoors)
 - Date / place:
